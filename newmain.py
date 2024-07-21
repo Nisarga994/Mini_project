@@ -43,7 +43,7 @@ if image_upload:
     x_initial=st.slider("X(0) initial",0.0,1.0,0.5)
     parameter=st.slider("Parameter(r)",3.5,4.0,3.8)
     iterations=st.slider("Iterations",100,500,256)
-    encrypted_msg = encrypt_message(secret_message,x_initial, parameter, iterations)
+    encrypted_msg =encrypt_message(secret_message,x_initial, parameter, iterations)
     hexa_text = text_to_hex(encrypted_msg)
     
 
@@ -61,7 +61,7 @@ if image_upload:
         image[n, m, 0] = character_to_code[hexa_text[i]]
         n += 1
         m += 1
-    if secret_message:
+    if st.button(label="encrypt"):
         st.image(image, caption="Encrypted Image")
 
     decrypt_msg = ""
@@ -76,8 +76,9 @@ if image_upload:
             decrypt_msg += code_to_character[image[n, m, 0]]
             n += 1
             m += 1
-        decrypted_msg=hex_to_text(decrypt_msg)
-        decrypt_text=decrypt_message(decrypted_msg,x_initial,parameter,iterations)
-        st.write("Decrypted message is:", decrypt_text)
+        if st.button(label="decrypt"):
+            decrypted_msg=hex_to_text(decrypt_msg)
+            decrypt_text=decrypt_message(decrypted_msg,x_initial,parameter,iterations)
+            st.write("Decrypted message is:", decrypt_text)
     else:
         st.write("Invalid password")
