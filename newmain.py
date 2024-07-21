@@ -1,6 +1,7 @@
 import numpy as np
 import streamlit as st
 import cv2
+import matplotlib.pyplot as plt 
 
 def logistic_map(x, r, iterations):
     for i in range(iterations):
@@ -63,6 +64,19 @@ if image_upload:
         m += 1
     if st.button(label="encrypt"):
         st.image(image, caption="Encrypted Image")
+
+        x_values=[]
+        y_values=[]
+        for i in range(iterations):
+            x=logistic_map(x_initial,parameter,i)
+            x_values.append(i)
+            y_values.append(x)
+        plt.plot(x_values,y_values)
+        plt.xlabel('Iteration')
+        plt.ylabel('Value')
+        plt.title('Chaos Sequence')
+        st.pyplot(plt)
+
 
     decrypt_msg = ""
 
